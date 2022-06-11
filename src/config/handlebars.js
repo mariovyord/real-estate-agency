@@ -5,4 +5,5 @@ module.exports = (app) => {
 		extname: '.hbs'
 	}).engine);
 	app.set('view engine', 'hbs');
+	app.set('views', './src/views');
 }

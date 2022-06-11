@@ -11,6 +11,8 @@ const port = process.env.PORT || 3000;
 	await require('./src/config/database')(process.env.CONNECTION_STRING);
 	require('./src/config/handlebars')(app);
 
+	app.use(express.urlencoded({ extended: true }));
+	app.use('/static', express.static('public'));
 	app.use(router);
 
 	app.listen(port, () => console.log('App is listening on port ' + port));
