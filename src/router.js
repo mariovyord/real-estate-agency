@@ -6,6 +6,7 @@ const homeController = require('./controllers/homeController');
 const housingForRentController = require('./controllers/housingForRentController');
 const searchController = require('./controllers/searchController');
 const authMiddleware = require('./middleware/authMiddleware');
+const hasUserGuard = require('./middleware/hasUserGuard');
 
 const router = require('express').Router();
 
@@ -26,7 +27,7 @@ router.route('/auth/register')
 	.get(register.get)
 	.post(register.post);
 
-router.all('/auth/logout', logout);
+router.all('/auth/logout', hasUserGuard(), logout);
 
 router.route('/details/:_id')
 	.get(detailsController.get);
@@ -34,8 +35,8 @@ router.route('/details/:_id')
 router.get('/rent/:_id', detailsController.rent);
 
 router.route('/edit/:_id')
-	.get(editController.get)
-	.post(editController.post);
+	.get(hasUserGuard(), editController.get)
+	.post(hasUserGuard(), editController.post);
 
 router.get('/delete/:_id', editController.delete);
 
@@ -43,8 +44,8 @@ router.route('/housing-for-rent')
 	.get(housingForRentController.get);
 
 router.route('/create-offer')
-	.get(createController.get)
-	.post(createController.post);
+	.get(hasUserGuard(), createController.get)
+	.post(hasUserGuard(), createController.post);
 
 router.route('/search')
 	.get(searchController.get)
