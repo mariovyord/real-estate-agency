@@ -11,7 +11,7 @@ module.exports = {
 				res.redirect('/');
 			} catch (err) {
 				console.log(err.message);
-				res.redirect('/auth/login');
+				res.render('login', { error: err.message });
 			}
 		}
 	},
@@ -21,11 +21,15 @@ module.exports = {
 		},
 		async post(req, res) {
 			try {
+				if (req.body.password != req.body['re-password']) {
+					throw new Error('Passwords should match')
+				}
+
 				await register(req.body, req.session);
 				res.redirect('/');
 			} catch (err) {
 				console.log(err.message);
-				res.redirect('/auth/register');
+				res.render('register', { error: err.message });
 			}
 
 		}
