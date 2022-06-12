@@ -6,6 +6,11 @@ const searchController = require('./controllers/searchController');
 
 const router = require('express').Router();
 
+router.use((req, res, next) => {
+	console.log('>>>', req.method, req.url);
+	next();
+})
+
 router.get('/', homeController);
 
 router.route('/auth/login')
