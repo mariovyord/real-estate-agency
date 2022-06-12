@@ -21,3 +21,8 @@ exports.getAllHouses = async () => {
 		.select('name image description owner').lean();
 	return houses;
 }
+
+exports.getHouseById = async (id) => {
+	const house = House.findById(id).populate('renters').lean();
+	return house;
+}

@@ -1,5 +1,6 @@
 const { login, register, logout } = require('./controllers/authController');
 const createController = require('./controllers/createController');
+const detailsController = require('./controllers/detailsController');
 const homeController = require('./controllers/homeController');
 const housingForRentController = require('./controllers/housingForRentController');
 const searchController = require('./controllers/searchController');
@@ -25,6 +26,10 @@ router.route('/auth/register')
 	.post(register.post);
 
 router.all('/auth/logout', logout);
+
+router.route('/details/:_id')
+	.get(detailsController.get)
+	.post(detailsController.post);
 
 router.route('/housing-for-rent')
 	.get(housingForRentController.get)
