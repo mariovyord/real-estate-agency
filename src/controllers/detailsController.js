@@ -4,11 +4,13 @@ module.exports = {
 	async get(req, res) {
 		const house = await getHouseById(req.params._id);
 		const hasUser = res.locals.hasUser;
-		let isOwner = false;
+		const usersData = {};
 		if (hasUser) {
-			isOwner = res.locals.user._id == house.owner;
+			usersData.isOwner = res.locals.user._id == house.owner;
+			usersData.isAvailable = house.available_pieces > 0;
+			usersData.hasRented = house.renters.map(x => x._id.toString()).includes(req.session.user._id);
 		}
-		res.render('details', { house, hasUser, isOwner });
+		res.render('details', { house, hasUser, usersData });
 	},
 	async post(req, res) {
 
