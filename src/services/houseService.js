@@ -14,3 +14,10 @@ exports.getThreeLatestHouses = async () => {
 		.select('name image').lean();
 	return houses;
 }
+
+exports.getAllHouses = async () => {
+	const houses = House.find({})
+		.sort({ createdAt: -1 })
+		.select('name image description owner').lean();
+	return houses;
+}

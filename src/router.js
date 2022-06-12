@@ -28,7 +28,6 @@ router.all('/auth/logout', logout);
 
 router.route('/housing-for-rent')
 	.get(housingForRentController.get)
-	.post(housingForRentController.post);
 
 router.route('/create-offer')
 	.get(createController.get)

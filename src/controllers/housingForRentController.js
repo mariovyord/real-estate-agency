@@ -1,8 +1,8 @@
-module.exports = {
-	get(req, res) {
-		res.render('aprt-for-rent');
-	},
-	post() {
+const { getAllHouses } = require("../services/houseService");
 
-	}
+module.exports = {
+	async get(req, res) {
+		const houses = await getAllHouses();
+		res.render('aprt-for-rent', { houses });
+	},
 }
