@@ -47,3 +47,7 @@ exports.deleteHouseById = async (houseId) => {
 	// TODO: Add owner validation
 	await House.deleteOne({ _id: houseId });
 }
+
+exports.searchByType = async (type) => {
+	return await House.find({ type: { $regex: new RegExp(type, "i") } }).lean();
+}
