@@ -37,6 +37,8 @@ router.route('/edit/:_id')
 	.get(editController.get)
 	.post(editController.post);
 
+router.get('/delete/:_id', editController.delete);
+
 router.route('/housing-for-rent')
 	.get(housingForRentController.get);
 

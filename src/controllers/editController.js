@@ -1,4 +1,4 @@
-const { getHouseById, editHouseById } = require("../services/houseService");
+const { getHouseById, editHouseById, deleteHouseById } = require("../services/houseService");
 
 module.exports = {
 	async get(req, res) {
@@ -12,6 +12,15 @@ module.exports = {
 		} catch (err) {
 			console.log(err.message);
 			res.redirect('/');
+		}
+	},
+	async delete(req, res) {
+		try {
+			await deleteHouseById(req.params._id);
+			res.redirect('/');
+		} catch (err) {
+			console.log(err.message);
+			res.redirect('/details/' + req.params._id);
 		}
 	}
 }

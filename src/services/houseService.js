@@ -41,3 +41,7 @@ exports.rentHouse = async (houseId, userId) => {
 exports.editHouseById = async (data, houseId) => {
 	await House.findByIdAndUpdate(houseId, data, { validators: true })
 }
+
+exports.deleteHouseById = async (houseId) => {
+	await House.deleteOne({ _id: houseId });
+}
