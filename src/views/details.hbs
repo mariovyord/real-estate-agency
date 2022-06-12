@@ -14,12 +14,12 @@
 
 					<!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
 					<p>People rented this housing:
-						{{#each house.renters}}
-						{{this.fullName}}
+						{{#if house.renters}}
+						{{house.renters}}
 						{{else}}
 						<!-- If not display: -->
 						There are no tenants yet.
-						{{/each}}
+						{{/if}}
 					</p>
 				</div>
 			</div>

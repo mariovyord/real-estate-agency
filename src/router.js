@@ -28,8 +28,9 @@ router.route('/auth/register')
 router.all('/auth/logout', logout);
 
 router.route('/details/:_id')
-	.get(detailsController.get)
-	.post(detailsController.post);
+	.get(detailsController.get);
+
+router.get('/rent/:_id', detailsController.rent)
 
 router.route('/housing-for-rent')
 	.get(housingForRentController.get)

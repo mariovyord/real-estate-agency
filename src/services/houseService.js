@@ -26,3 +26,14 @@ exports.getHouseById = async (id) => {
 	const house = House.findById(id).populate('renters').lean();
 	return house;
 }
+
+exports.rentHouse = async (houseId, userId) => {
+	const house = await House.findById(houseId);
+	if (house.available_pieces > 0) {
+		house.renters.push(userId);
+		house.available_pieces--;
+		house.save();
+	} else {
+		throw new Error('There are no available pieces')
+	}
+}
