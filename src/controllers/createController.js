@@ -10,7 +10,7 @@ module.exports = {
 			res.redirect('/');
 		} catch (err) {
 			console.log(err.message);
-			res.redirect('/create-offer');
+			res.render('create', { error: err.message });
 		}
 	}
 }
