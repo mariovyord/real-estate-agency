@@ -1,8 +1,9 @@
-const { login, register } = require('./controllers/authController');
+const { login, register, logout } = require('./controllers/authController');
 const createController = require('./controllers/createController');
 const homeController = require('./controllers/homeController');
 const housingForRentController = require('./controllers/housingForRentController');
 const searchController = require('./controllers/searchController');
+const authMiddleware = require('./middleware/authMiddleware');
 
 const router = require('express').Router();
 
@@ -10,6 +11,8 @@ router.use((req, res, next) => {
 	console.log('>>>', req.method, req.url);
 	next();
 })
+
+router.use(authMiddleware());
 
 router.get('/', homeController);
 
@@ -20,6 +23,8 @@ router.route('/auth/login')
 router.route('/auth/register')
 	.get(register.get)
 	.post(register.post);
+
+router.all('/auth/logout', logout);
 
 router.route('/housing-for-rent')
 	.get(housingForRentController.get)
