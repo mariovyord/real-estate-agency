@@ -1,6 +1,7 @@
 const { login, register, logout } = require('./controllers/authController');
 const createController = require('./controllers/createController');
 const detailsController = require('./controllers/detailsController');
+const editController = require('./controllers/editController');
 const homeController = require('./controllers/homeController');
 const housingForRentController = require('./controllers/housingForRentController');
 const searchController = require('./controllers/searchController');
@@ -30,10 +31,14 @@ router.all('/auth/logout', logout);
 router.route('/details/:_id')
 	.get(detailsController.get);
 
-router.get('/rent/:_id', detailsController.rent)
+router.get('/rent/:_id', detailsController.rent);
+
+router.route('/edit/:_id')
+	.get(editController.get)
+	.post(editController.post);
 
 router.route('/housing-for-rent')
-	.get(housingForRentController.get)
+	.get(housingForRentController.get);
 
 router.route('/create-offer')
 	.get(createController.get)

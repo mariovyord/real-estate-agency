@@ -37,3 +37,7 @@ exports.rentHouse = async (houseId, userId) => {
 		throw new Error('There are no available pieces')
 	}
 }
+
+exports.editHouseById = async (data, houseId) => {
+	await House.findByIdAndUpdate(houseId, data, { validators: true })
+}
