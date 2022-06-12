@@ -5,4 +5,12 @@ exports.createHousing = async (houseData, userId) => {
 	const housing = new House(data);
 	await housing.save();
 	console.log('Housing created');
-} 
+}
+
+exports.getThreeLatestHouses = async () => {
+	const houses = House.find({})
+		.sort({ createdAt: -1 })
+		.limit(3)
+		.select('name image').lean();
+	return houses;
+}

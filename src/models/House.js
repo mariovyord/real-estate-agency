@@ -38,8 +38,11 @@ const houseSchema = new mongoose.Schema({
 	owner: {
 		type: mongoose.Types.ObjectId,
 		ref: 'User',
-	}
-})
+	},
+},
+	{
+		timestamps: true,
+	})
 
 const House = mongoose.model('House', houseSchema);
 
