@@ -4,6 +4,7 @@ const express = require('express');
 const router = require('./src/router');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const helmet = require('helmet');
 
 const port = process.env.PORT || 3000;
 
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3000;
 	await require('./src/config/database')(process.env.CONNECTION_STRING);
 	require('./src/config/handlebars')(app);
 
+	// app.use(helmet());
 	app.use(express.urlencoded({ extended: true }));
 	app.use(cookieParser());
 	app.use(session({
