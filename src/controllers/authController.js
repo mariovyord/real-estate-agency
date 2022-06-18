@@ -1,4 +1,5 @@
 const { register, login, logout } = require('../services/authService');
+const { mapErrors } = require('../utils/mapErrors');
 
 module.exports = {
 	login: {
@@ -10,8 +11,9 @@ module.exports = {
 				await login(req.body, req.session);
 				res.redirect('/');
 			} catch (err) {
-				console.log(err.message);
-				res.render('login', { error: err.message });
+				const errors = mapErrors(err);
+				console.log(errors)
+				res.render('login', { errors });
 			}
 		}
 	},
@@ -28,8 +30,9 @@ module.exports = {
 				await register(req.body, req.session);
 				res.redirect('/');
 			} catch (err) {
-				console.log(err.message);
-				res.render('register', { error: err.message });
+				const errors = mapErrors(err);
+				console.log(errors)
+				res.render('register', { errors });
 			}
 
 		}
